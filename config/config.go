@@ -2,11 +2,12 @@ package config
 
 // Config ...
 type Config struct {
-	URL string
-	Key string
+	URL     string
+	Key     string
+	Version string
 }
 
 // Newonfig ...
-func Newonfig() *Config {
+func NewConfig() *Config {
 	return &Config{}
 }

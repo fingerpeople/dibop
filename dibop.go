@@ -2,6 +2,7 @@ package dibop
 
 import (
 	"github.com/fingerpeople/dibop/config"
+	"github.com/fingerpeople/dibop/sdk/user"
 )
 
 // Dibop ...
@@ -10,20 +11,27 @@ type Dibop struct {
 	Key  string
 }
 
+// InputConfig ...
+func InputConfig() *Dibop {
+	return &Dibop{}
+}
+
 // Client ...
-func Client(config *config.Config) *Dibop {
-	cfg := &Dibop{}
-	cfg.Key = config.Key
-	cfg.Urls = config.URL
+func Client(cfgData *Dibop) *config.Config {
+	cfg := &config.Config{}
+	cfg.Key = cfgData.Key
+	cfg.URL = cfgData.Urls
 	return cfg
 }
 
-// User ...
-func (cl *Dibop) User() {
-
+// SDK ...
+type SDK struct {
+	Users user.UserInterface
 }
 
-// Paramaters ...
-func (cl *Dibop) Paramaters() {
-
+// SDKHandler ...
+func SDKHandler(cfg *config.Config) *SDK {
+	return &SDK{
+		Users: user.UserHandler(cfg),
+	}
 }
