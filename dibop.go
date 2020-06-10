@@ -7,8 +7,9 @@ import (
 
 // Dibop ...
 type Dibop struct {
-	Urls string
-	Key  string
+	Urls    string
+	Key     string
+	Version string
 }
 
 // InputConfig ...
@@ -21,6 +22,7 @@ func Client(cfgData *Dibop) *config.Config {
 	cfg := &config.Config{}
 	cfg.Key = cfgData.Key
 	cfg.URL = cfgData.Urls
+	cfg.Version = cfgData.Version
 	return cfg
 }
 
