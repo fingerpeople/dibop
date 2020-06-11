@@ -28,7 +28,7 @@ func UserHandler(configs *config.Config) *User {
 
 // UserInterface ...
 type UserInterface interface {
-	GetUserDetails() (*entity.ResponseUserDetails, error)
+	GetUserDetails(user string) (*entity.ResponseUserDetails, error)
 }
 
 // initURL ...
@@ -49,9 +49,8 @@ func (handler *User) GetUserList() {
 }
 
 // GetUserDetails ...
-func (handler *User) GetUserDetails() (*entity.ResponseUserDetails, error) {
-
-	uri := handler.initURL() + "get?user=dibop"
+func (handler *User) GetUserDetails(user string) (*entity.ResponseUserDetails, error) {
+	uri := handler.initURL() + "get?user=" + user
 	data, err := handler.Requester.GET(uri, handler.initHeader())
 	if err != nil {
 		return nil, err
