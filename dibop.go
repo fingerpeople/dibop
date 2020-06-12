@@ -2,6 +2,7 @@ package dibop
 
 import (
 	"github.com/fingerpeople/dibop/config"
+	"github.com/fingerpeople/dibop/sdk/parameter"
 	"github.com/fingerpeople/dibop/sdk/user"
 )
 
@@ -28,12 +29,14 @@ func Client(cfgData *Dibop) *config.Config {
 
 // SDK ...
 type SDK struct {
-	Users user.UserInterface
+	Users     user.UserInterface
+	Parameter parameter.ParameterInterface
 }
 
 // SDKHandler ...
 func SDKHandler(cfg *config.Config) *SDK {
 	return &SDK{
-		Users: user.UserHandler(cfg),
+		Users:     user.UserHandler(cfg),
+		Parameter: parameter.ParameterHandler(cfg),
 	}
 }

@@ -29,6 +29,7 @@ func UserHandler(configs *config.Config) *User {
 // UserInterface ...
 type UserInterface interface {
 	GetUserDetails(user string) (*entity.ResponseUserDetails, error)
+	GetUserList() (*entity.ResponseUserList, error)
 }
 
 // initURL ...
@@ -44,8 +45,18 @@ func (handler *User) initHeader() map[string]string {
 }
 
 // GetUserList ...
-func (handler *User) GetUserList() {
-
+func (handler *User) GetUserList() (*entity.ResponseUserList, error) {
+	uri := handler.initURL() + "list"
+	data, err := handler.Requester.GET(uri, handler.initHeader())
+	if err != nil {
+		return nil, err
+	}
+	result := &entity.ResponseUserList{}
+	err = json.Unmarshal(data, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetUserDetails ...
